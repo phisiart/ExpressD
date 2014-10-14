@@ -1,0 +1,4 @@
+1. git pull (pull the latest version from the server)
+2. git add -A (tell git to track all files in the directory)
+3. git commit -a -m "your message" (create a version)
+4. git push (push the version to the server) 
