@@ -1,0 +1,19 @@
+# ExpressD
+
+Group members
+-------------
+
+Name:  Zhixun Tan
+NetId: zt20
+
+Name:  Charles Xu  
+NetId: cx15
+
+Name:  Eric Chen  
+NetId: xc58
+
+How to test the SQL
+-------------------
+dropdb expressd
+createdb expressd
+psql expressd -af TEST-SAMPLE.SQL
