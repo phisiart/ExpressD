@@ -1,0 +1,29 @@
+{
+    "menu" : [
+        {
+            "iid":        1,
+            "name":       "Chicken Pommes Frites",
+            "price":      1300,
+            "timeToCook": "00:05:00"
+        },
+        {
+            "iid":        2,
+            "name":       "Spaghetti And Meatballs",
+            "price":      1200,
+            "timeToCook": "00:05:00"
+        }
+    ],
+
+    "itemAvailableWeeklyHours" : [
+        {
+            "iid": 1,
+            "start": "17:00:00",
+            "end": "23:00:00"
+        },
+        {
+            "iid": 1,
+            "start": "17:00:00",
+            "end": "23:00:00"
+        }
+    ]
+}
