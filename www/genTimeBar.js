@@ -40,3 +40,14 @@ function genTimeBar(startTime, endTime) {
     str += "</div>";
     return str;
 }
+
+function timeAvailable(intendedTime, startTime, endTime) {
+    t = HMStoSec(intendedTime);
+    s = HMStoSec(startTime);
+    e = HMStoSec(endTime);
+    if (e >= s) {
+        return t >= s && t <= e;
+    } else {
+        return t <= e || t >= s;
+    }
+}

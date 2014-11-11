@@ -133,7 +133,6 @@
                     str += "<tr>";
                     str += "<td><a href=\"\">" + diner.name + "</a></td>";
                     str += "<td>" + diner.loc + "</td>";
-                    // str += "<td><div class=\"progress\" style=\"margin-bottom: 0px;\">" + genTimeBar(diner.openTime, diner.closeTime) + "</div>";
                     str += "<td>" + genTimeBar(diner.openTime, diner.closeTime) + "</td>";
                     str += "</tr>";
 
@@ -142,7 +141,6 @@
             }
 
             function updateTable() {
-                console.log(genTable());
                 document.getElementById("dinerTable").innerHTML = genTable();
             }
 
@@ -151,8 +149,8 @@
                     "did": 1,
                     "name": "Au Bon Pain",
                     "loc": "Bryan Center",
-                    "openTime": "07:00:00",
-                    "closeTime": "23:59:59"
+                    "openTime": "14:00:00",
+                    "closeTime": "6:59:59"
                 },
                 {
                     "did": 2,
@@ -166,19 +164,6 @@
             updateTable();
 
         </script>
-        <div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" title="" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;" data-original-title="Copy to clipboard">
-            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">
-                <param name="movie" value="/assets/flash/ZeroClipboard.swf?noCache=1414091865264">
-                <param name="allowScriptAccess" value="sameDomain">
-                <param name="scale" value="exactfit">
-                <param name="loop" value="false">
-                <param name="menu" value="false">
-                <param name="quality" value="best">
-                <param name="bgcolor" value="#ffffff">
-                <param name="wmode" value="transparent">
-                <param name="flashvars" value="trustedOrigins=getbootstrap.com%2C%2F%2Fgetbootstrap.com%2Chttp%3A%2F%2Fgetbootstrap.com">
-                <embed src="/assets/flash/ZeroClipboard.swf?noCache=1414091865264" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedOrigins=getbootstrap.com%2C%2F%2Fgetbootstrap.com%2Chttp%3A%2F%2Fgetbootstrap.com" scale="exactfit">
-            </object>
-        </div>
+
     </body>
 </html>
