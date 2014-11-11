@@ -1,20 +1,26 @@
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
-
-from express.models import *
+import django
+from express.models import Type, Diner, Item
+django.setup()
+import datetime
 
 types = [
-    Type(did=Diner.objects.filter(name="Au Bon Pain")[0].did, name="Sandwiches"),
-
+    Type(did=Diner.objects.filter(name="Au Bon Pain")[0], name="Sandwiches"),
 ]
 
+for t in types:
+    t.save()
+
 items = [
-    Item(tid=Type.objects.filter(name="Sandwiches")[0].tid,
-         did=Diner.objects.filter(name="Au Bon Pain")[0].did,
+    Item(tid=Type.objects.filter(name="Sandwiches")[0],
+         did=Diner.objects.filter(name="Au Bon Pain")[0],
          name="Turkey Club",
-         price=1300
+         price=1300,
          timeToCook=datetime.datetime.strptime("00:05:00", '%H:%M:%S').time())
 ]
 
-for diner in diners:
-    diner.save()
+
+
+for i in items:
+    i.save()
