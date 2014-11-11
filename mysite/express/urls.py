@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
 
-from polls import views
+from express import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
+    url(r'^(?P<diner_id>\d+)$', views.order, name='order')
 )
