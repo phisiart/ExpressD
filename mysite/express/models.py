@@ -6,8 +6,14 @@ class Diner(models.Model):
     name = models.CharField(max_length=200)
     loc = models.CharField(max_length=200)
 
+class Type(models.Model):
+    did = models.ForeignKey('Diner')
+    tid = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+
 class Item(models.Model):
     iid = models.AutoField(primary_key=True)
+    tid = models.ForeignKey('Type')
     did = models.ForeignKey('Diner')
     name = models.CharField(max_length=200)
     price = models.PositiveIntegerField()
@@ -94,4 +100,3 @@ class ItemHour(models.Model):
     )
     openTime = models.TimeField()
     closeTime = models.TimeField()
-    
