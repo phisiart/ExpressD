@@ -13,7 +13,7 @@ items = [
          did=Diner.objects.filter(name="Au Bon Pain")[0].did,
          name="Turkey Club",
          price=1300
-         timeToCook="")
+         timeToCook=datetime.datetime.strptime("00:05:00", '%H:%M:%S').time())
 ]
 
 for diner in diners:
