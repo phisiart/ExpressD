@@ -140,6 +140,58 @@
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
         <script src="/static/js/genTimeBar.js"></script>
+        <script type="text/javascript">
+            // let's put all the data in here.
+            {% autoescape off %}
+            var data = {{ data }}
+            {% endautoescape %}
+
+            // var data = {
+            //     "timePicked": false,
+
+            //     "pickedTime": "17:00:00",
+
+            //     "tid": 1,
+
+            //     "types": [
+            //         {
+            //             "tid":        1,
+            //             "name":       "Dinner"
+            //         },
+            //         {
+            //             "tid":        2,
+            //             "name":       "Breakfast"
+            //         }
+            //     ],
+
+            //     "items": [
+            //         {
+            //             "iid":        1,
+            //             "tid":        1,
+            //             "name":       "Chicken Pommes Frites",
+            //             "price":      1300,
+            //             "timeToCook": "00:05:00",
+            //             "startTime":  "17:00:00",
+            //             "endTime":    "23:00:00"
+            //         },
+            //         // {
+            //         //     "iid":        2,
+            //         //     "tid":        1,
+            //         //     "name":       "Spaghetti And Meatballs",
+            //         //     "price":      1200,
+            //         //     "timeToCook": "00:05:00",
+            //         //     "startTime":  "17:00:00",
+            //         //     "endTime":    "23:00:00"
+            //         // }
+            //     ],
+
+            //     "orders": [
+            //         { iid: 1, number: 2 },
+            //         { iid: 2, number: 3 }
+            //     ]
+            // };
+
+        </script>
         <script src="/static/js/order.js"></script>
 
     </body>

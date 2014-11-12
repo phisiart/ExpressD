@@ -121,18 +121,18 @@
         <!-- Bootstrap core JavaScript
             ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/docs.min.js"></script>
+        <script src="static/js/jquery.min.js"></script>
+        <script src="static/js/bootstrap.min.js"></script>
+        <script src="static/js/docs.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="/js/ie10-viewport-bug-workaround.js"></script>
-        <script src="/js/genTimeBar.js"></script>
+        <script src="static/js/ie10-viewport-bug-workaround.js"></script>
+        <script src="static/js/genTimeBar.js"></script>
         <script type="text/javascript">
             function genTable() {
                 var str = "";
                 diners.forEach(function(diner) {
                     str += "<tr>";
-                    str += "<td><a href=\"\">" + diner.name + "</a></td>";
+                    str += "<td><a href=\"" + diner.did + "\">" + diner.name + "</a></td>";
                     str += "<td>" + diner.loc + "</td>";
                     str += "<td>" + genTimeBar(diner.openTime, diner.closeTime) + "</td>";
                     str += "</tr>";
@@ -145,22 +145,26 @@
                 document.getElementById("dinerTable").innerHTML = genTable();
             }
 
-            diners = [
-                {
-                    "did": 1,
-                    "name": "Au Bon Pain",
-                    "loc": "Bryan Center",
-                    "openTime": "14:00:00",
-                    "closeTime": "6:59:59"
-                },
-                {
-                    "did": 2,
-                    "name": "Cafe Edens",
-                    "loc": "McClendon Tower",
-                    "openTime": "00:00:00",
-                    "closeTime": "23:59:59"
-                }
-            ];
+            // diners = [
+            //     {
+            //         "did": 1,
+            //         "name": "Au Bon Pain",
+            //         "loc": "Bryan Center",
+            //         "openTime": "14:00:00",
+            //         "closeTime": "6:59:59"
+            //     },
+            //     {
+            //         "did": 2,
+            //         "name": "Cafe Edens",
+            //         "loc": "McClendon Tower",
+            //         "openTime": "00:00:00",
+            //         "closeTime": "23:59:59"
+            //     }
+            // ];
+
+            {% autoescape off %}
+            diners = {{ data }}
+            {% endautoescape %}
 
             updateTable();
 
