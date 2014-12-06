@@ -36,10 +36,7 @@ function pickTimeOkay() {
         var time = document.getElementById("textPickTime").value;
         var A = time.split(/\D+/);
         A = [+A[0], +A[1], +A[2]];
-        var date = new Date();
-        var currentSecond = HMStoSec(addZero(date.getHours()) + ":" + addZero(date.getMinutes()) + ":" + addZero(date.getSeconds()));
-
-        if (A[0] >= 0 && A[0] <= 23 && A[1] >= 0 && A[1] <= 59 && A[2] >= 0 && A[2] <= 59 && currentSecond <= HMStoSec(time)) {
+        if (A[0] >= 0 && A[0] <= 23 && A[1] >= 0 && A[1] <= 23 && A[2] >= 0 && A[2] <= 23) {
             // valid time
             data.pickedTime = addZero(A[0]) + ":" + addZero(A[1]) + ":" + addZero(A[2]);
             document.getElementById("divWhenWantFood").innerHTML = data.pickedTime;
@@ -81,7 +78,7 @@ function genTable() {
         str += "<td>";
         str +=   "<form class='form-inline' role='form'>";
         str +=    "<input id='input" + item.iid + "' type='number' min='0'";
-        if (!data.timePicked || !timeAvailable(document.getElementById("divWhenWantFood").innerHTML, item.startTime, item.endTime)) {
+        if (!data.timePicked) {
             str += " disabled ";
         }
         str +=           "class='form-control' placeholder='0' style='max-width: 60px;'";
@@ -195,76 +192,6 @@ function changeOrder(iid) {
 function changeType(tid) {
     data.tid = tid;
     updatePage();
-}
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-function submitOrder() {
-    var xmlhttp;
-    if (window.XMLHttpRequest) {
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function() {
-        if (4 == xmlhttp.readyState && 200 == xmlhttp.status) {
-            console.log(xmlhttp.responseText);
-        }
-    };
-    xmlhttp.open("POST", "send_order", true);
-    var csrftoken = getCookie('csrftoken');
-    xmlhttp.setRequestHeader("X-CSRFToken", csrftoken);
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-    var pickUpTime = moment();
-    console.log(pickUpTime);
-    var max_seconds = 0;
-
-    // for each ordered item.
-    data.orders.forEach(function(order) {
-
-        // get number of seconds to cook
-        seconds = 0;
-        data.items.forEach(function(item) {
-            if (item.iid == order.iid) {
-                seconds = HMStoSec(item.timeToCook);
-                return;
-            }
-        });
-
-        if (seconds > max_seconds) {
-            max_seconds = seconds;
-        }
-    });
-
-    pickUpTime.add(max_seconds, 's');
-    var writtenTime = moment(document.getElementById("divWhenWantFood").innerHTML, "HH:MM:SS");
-    console.log(pickUpTime);
-    var req_body = {
-        'cardid' :      document.getElementById('inputCard').value,
-        'name':         document.getElementById('inputName').value,
-        'email':        document.getElementById('inputEmail').value,
-        'phone':        document.getElementById('inputPhone').value,
-        'pickUpTime':   pickUpTime.toJSON(),
-        'did':          data.did,
-        'orders':       data.orders,
-    };
-
-    xmlhttp.send(JSON.stringify(req_body));
 }
 
 updatePage();

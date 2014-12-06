@@ -5,8 +5,6 @@ django.setup()
 
 from express.models import *
 
-# Diners
-# ------
 Diner.objects.all().delete()
 
 diners = [
@@ -19,13 +17,10 @@ diners = [
 for diner in diners:
     diner.save()
 
-from datetime import datetime
+import datetime
 
 Item.objects.all().delete()
 Type.objects.all().delete()
-
-# Types
-# -----
 
 def NewType(diner_name, type_name):
     return Type(did=Diner.objects.filter(name=diner_name)[0], name=type_name)
@@ -46,8 +41,6 @@ for t in types:
     t.save()
 
 
-# Items
-# -----
 
 def NewItem(type_name, diner_name, item_name, item_price, item_time_to_cook):
     return Item(
@@ -55,7 +48,7 @@ def NewItem(type_name, diner_name, item_name, item_price, item_time_to_cook):
         did=Diner.objects.filter(name=diner_name)[0],
         name=item_name,
         price=item_price,
-        timeToCook=datetime.strptime(item_time_to_cook, '%H:%M:%S').time()
+        timeToCook=datetime.datetime.strptime(item_time_to_cook, '%H:%M:%S').time()
     )
 
 items = [
@@ -83,72 +76,4 @@ items = [
 ]
 
 for i in items:
-    i.save()
-
-# Users
-# -----
-User.objects.all().delete()
-
-users = [
-    User(123456789, 'Somebody', '9191234567', 'somebody@something.com')
-]
-
-for u in users:
-    u.save()
-
-# Orders
-# ------
-Order.objects.all().delete()
-
-orders = [
-    Order(
-        cardid=User.objects.get(cardid='123456789'),
-        did=Diner.objects.get(name="Blue Express"),
-        timePlaced=datetime.now(),
-        scheduledPickUpTime=datetime.now(),
-        # stat='PE',
-    )
-]
-
-for o in orders:
-    o.save()
-
-
-# DinerHours
-# ----------
-DinerHour.objects.all().delete()
-
-def NewDinerHour(diner_name, day, openTime, closeTime):
-    return DinerHour(
-        did=Diner.objects.filter(name=diner_name)[0],
-        day=day,
-        openTime=datetime.strptime(openTime, '%H:%M:%S').time(),
-        closeTime=datetime.strptime(closeTime, '%H:%M:%S').time(),
-    )
-
-diner_hours = [
-    NewDinerHour("Au Bon Pain", "MO", "07:00:00", "12:00:00"),
-    NewDinerHour("Au Bon Pain", "SA", "07:00:00", "12:00:00"),
-]
-
-for d in diner_hours:
-    d.save()
-
-# ItemHours
-# ---------
-
-def NewItemHour(diner_name, item_name, day, openTime, closeTime):
-    return ItemHour(
-        iid=Item.objects.filter(did=Diner.objects.filter(name=diner_name)[0], name=item_name)[0],
-        day=day,
-        openTime=datetime.strptime(openTime, '%H:%M:%S').time(),
-        closeTime=datetime.strptime(closeTime, '%H:%M:%S').time(),
-    )
-
-item_hours = [
-    NewItemHour("Au Bon Pain", "Turkey Club", "MO", "07:00:00", "12:00:00"),
-    NewItemHour("Au Bon Pain", "Turkey Club", "SA", "07:00:00", "12:00:00"),
-]
-
-for i in item_hours:
     i.save()

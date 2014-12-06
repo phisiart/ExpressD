@@ -50,7 +50,6 @@ class Order(models.Model):
 class Include(models.Model):
     oid = models.ForeignKey('Order')
     iid = models.ForeignKey('Item')
-    number = models.PositiveIntegerField()
 
 class DinerHour(models.Model):
     did = models.ForeignKey('Diner')

@@ -1,0 +1,17 @@
+# ExpressD
+
+Group members
+-------------
+
+Name:  Zhixun Tan
+NetId: zt20
+
+Name:  Charles Xu  
+NetId: cx15
+
+Name:  Eric Chen  
+NetId: xc58
+
+# How to run
+------------
+python manage.py runserver
