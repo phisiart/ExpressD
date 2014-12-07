@@ -132,7 +132,7 @@ def order(request, diner_id):
 
     t = template.Template(open('order.html').read())
 
-    c = template.Context({'data': json.dumps(data)})
+    c = template.Context({'data': json.dumps(data), 'did': diner_id})
     print "haha"
     return HttpResponse(t.render(c))
 
@@ -223,7 +223,7 @@ def list_orders(request, diner_id):
 
     t = template.Template(open('list.html').read())
 
-    c = template.Context({'data': json.dumps(data)})
+    c = template.Context({'data': json.dumps(data), 'did': diner_id})
     print "haha"
     return HttpResponse(t.render(c))
 
@@ -297,9 +297,9 @@ def send_order(request):
             include.save()
 
         print 'include'
-        return HttpResponse("lalala")
+        return HttpResponse("send_order_finished")
     else:
-        return HttpResponse("what")
+        return HttpResponse("what_the_huck")
 
 def change_status(request):
     if request.method == "POST":

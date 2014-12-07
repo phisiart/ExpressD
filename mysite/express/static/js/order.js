@@ -31,6 +31,7 @@ function pickTimeOkay() {
         document.getElementById("divWhenWantFood").innerHTML = data.pickedTime;
         data.timePicked = true;
         updatePage();
+        document.getElementById("but_send_order").disabled = false;
     } else {
         // user picked time.
         var time = document.getElementById("textPickTime").value;
@@ -45,6 +46,7 @@ function pickTimeOkay() {
             document.getElementById("divWhenWantFood").innerHTML = data.pickedTime;
             data.timePicked = true;
             updatePage();
+            document.getElementById("but_send_order").disabled = false;
         } else {
             // invalid time
             document.getElementById("spanOkay").innerHTML = "It turns out the time you entered is not valid. Please try again.";
@@ -222,7 +224,17 @@ function submitOrder() {
     }
     xmlhttp.onreadystatechange = function() {
         if (4 == xmlhttp.readyState && 200 == xmlhttp.status) {
-            console.log(xmlhttp.responseText);
+            if (xmlhttp.responseText == "send_order_finished") {
+                document.getElementById("modal_title").innerHTML = "Order sent";
+                document.getElementById("modal_text").innerHTML = "You will receive an email when the restaurant confirms your order.";
+
+            } else {
+                document.getElementById("modal_title").innerHTML = "Sending failed";
+                document.getElementById("modal_text").innerHTML = "Sending failed";
+            }
+            // console.log(xmlhttp.responseText);
+            // document.getElementById("but_show_modal").click();
+            $('#myModal').modal('show');
         }
     };
     xmlhttp.open("POST", "send_order", true);

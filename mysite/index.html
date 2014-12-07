@@ -51,20 +51,20 @@
                     <div class="masthead clearfix">
                         <div class="inner">
                             <h3 class="masthead-brand">ExpressD</h3>
-                            <ul class="nav masthead-nav">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#">Diners</a></li>
-                                <li><a href="#">Useless link</a></li>
+                            <ul class="nav masthead-nav" id="top_nav">
+                                <li class="active"><a href="#">Take order</a></li>
+                                <li><a href="#">Current orders</a></li>
+                                <!-- <li><a href="#">Useless link</a></li> -->
                             </ul>
                         </div>
                     </div>
-                    I want to put a slide here.
+                    <!-- I want to put a slide here. -->
                     <div class="inner cover">
                         <h1 class="cover-heading">Now take your order</h1>
-                        <p class="lead">This is such a cool webpage that I almost cried.</p>
-                        <p class="lead">
+                        <!-- <p class="lead">This is such a cool webpage that I almost cried.</p> -->
+                        <!-- <p class="lead">
                             <a href="" class="btn btn-lg btn-default">Useless Button</a>
-                        </p>
+                        </p> -->
                         <div class="table-responsive">
                             <table class="table">
                                 <!-- table-striped -->
@@ -128,11 +128,33 @@
         <script src="static/js/ie10-viewport-bug-workaround.js"></script>
         <script src="static/js/genTimeBar.js"></script>
         <script type="text/javascript">
+            var currentOrders = false;
+
+            function takeOrder() {
+                currentOrders = false;
+                document.getElementById("top_nav").innerHTML = "\
+                    <li class='active'><a href='javascript:takeOrder()'>Take order</a></li> \
+                    <li><a href='javascript:dinersEntry()'>Current orders</a></li>";
+                updateTable();
+            }
+
+            function dinersEntry() {
+                currentOrders = true;
+                document.getElementById("top_nav").innerHTML = "\
+                    <li><a href='javascript:takeOrder()'>Take order</a></li> \
+                    <li class='active'><a href='javascript:dinersEntry()'>Current orders</a></li>";
+                updateTable();
+            }
+
             function genTable() {
                 var str = "";
                 diners.forEach(function(diner) {
                     str += "<tr>";
-                    str += "<td><a href=\"" + diner.did + "\">" + diner.name + "</a></td>";
+                    if (currentOrders) {
+                        str += "<td><a href=\"" + 'o' + diner.did + "\">" + diner.name + "</a></td>";
+                    } else {
+                        str += "<td><a href=\"" + diner.did + "\">" + diner.name + "</a></td>";
+                    }
                     str += "<td>" + diner.loc + "</td>";
                     str += "<td>" + genTimeBar(diner.openTime, diner.closeTime) + "</td>";
                     str += "</tr>";
@@ -145,27 +167,11 @@
                 document.getElementById("dinerTable").innerHTML = genTable();
             }
 
-            // diners = [
-            //     {
-            //         "did": 1,
-            //         "name": "Au Bon Pain",
-            //         "loc": "Bryan Center",
-            //         "openTime": "14:00:00",
-            //         "closeTime": "6:59:59"
-            //     },
-            //     {
-            //         "did": 2,
-            //         "name": "Cafe Edens",
-            //         "loc": "McClendon Tower",
-            //         "openTime": "00:00:00",
-            //         "closeTime": "23:59:59"
-            //     }
-            // ];
-
             {% autoescape off %}
             diners = {{ data }}
             {% endautoescape %}
 
+            takeOrder();
             updateTable();
 
         </script>
